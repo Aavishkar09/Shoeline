@@ -1,4 +1,4 @@
-const port = 4000;
+const port = process.env.PORT || 4000;
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -106,7 +106,7 @@ app.post('/addproduct', async (req, res) => {
     const product = new Product({
         id: id,
         name: req.body.name,
-        image: req.body.image,  // Cloudinary image URL
+        image: req.body.image,
         category: req.body.category,
         new_price: req.body.new_price,
         old_price: req.body.old_price,
@@ -118,7 +118,7 @@ app.post('/addproduct', async (req, res) => {
             res.json({ success: true, name: req.body.name });
         })
         .catch((err) => {
-            console.error("Error saving product:", err);  // Log exact error
+            console.error("Error saving product:", err);  
             res.status(400).json({ success: false, error: err.message });
         });
 });
