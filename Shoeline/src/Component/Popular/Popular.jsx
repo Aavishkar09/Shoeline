@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './Popular.css'
 import Item from '../Item/Item'
 
+
 const Popular = () => {
 
   const [popularProducts,setPopularProducts] = useState([]);
 
   useEffect(()=>{
-    fetch(`${process.env.REACT_APP_URL}/popularinmen`)
+    fetch(`${import.meta.env.VITE_API_URL}/popularinmen`)
     .then((response)=>response.json())
     .then((data)=>setPopularProducts(data))
   },[])

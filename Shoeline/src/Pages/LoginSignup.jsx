@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+
 import './css/LoginSignup.css'
 const LoginSignup = () => {
   
@@ -17,7 +18,7 @@ const LoginSignup = () => {
   const login = async () => {
     console.log("Login Function executed",formData)
     let responseData;
-    await fetch(`${process.env.REACT_APP_URL}/login`,{
+    await fetch(`${import.meta.env.VITE_API_URL}/login`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',
@@ -38,7 +39,7 @@ const LoginSignup = () => {
   const signup = async ()=>{
     console.log("SignUp Function executed",formData)
     let responseData;
-    await fetch(`${process.env.REACT_APP_URL}/signup`,{
+    await fetch(`${import.meta.env.VITE_API_URL}/signup`,{
       method:'POST',
       headers:{
         Accept:'application/form-data',
