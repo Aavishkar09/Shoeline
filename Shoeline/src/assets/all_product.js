@@ -36,6 +36,9 @@ let all_product = [
         image:s1_img,
         new_price:17295,
         old_price:18000,
+        size: ['8', '9', '10', '11'],
+        color: ['Black', 'Red'],
+        type: 'Basketball'
       },
       {id:2,
         name:"Nike Air Max Plus",
@@ -43,6 +46,9 @@ let all_product = [
         image:s2_img,
         new_price:15995,
         old_price:16200,
+        size: ['7', '8', '9', '10'],
+        color: ['White', 'Blue'],
+        type: 'Running'
       },
       {id:3,
         name:"Jumpman MVP",
@@ -50,6 +56,9 @@ let all_product = [
         image:s3_img,
         new_price:15295,
         old_price:15600,
+        size: ['8', '9', '10', '11', '12'],
+        color: ['Black', 'White'],
+        type: 'Sneakers'
       },
       {id:4,
         name:"Tatum 2 PF Basketball Shoes",
@@ -57,6 +66,9 @@ let all_product = [
         image:s4_img,
         new_price:10795,
         old_price:11000,
+        size: ['7', '8', '9', '10', '11'],
+        color: ['Green', 'Black'],
+        type: 'Basketball'
       },
 
       {
@@ -140,6 +152,9 @@ let all_product = [
         image: s23_img,
         new_price: 8695,
         old_price: 7500,
+        size: ['6', '7', '8'],
+        color: ['White', 'Blue'],
+        type: 'Sandals'
       },
       {
         id: 24,
@@ -156,6 +171,9 @@ let all_product = [
         image: s25_img,
         new_price: 12295,
         old_price: 7500,
+        size: ['6', '7', '8', '9'],
+        color: ['Black', 'White'],
+        type: 'Sneakers'
       },
       {
         id: 26,

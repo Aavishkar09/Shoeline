@@ -70,9 +70,11 @@
 }
 @media(max-width:500px){
     .item{
-        width: 90px;
+        width: 100%;
+        max-width: 180px;
+        margin: 0 auto;
     }
     .item img{
-        width: 90px;
+        width: 100%;
     }
 }
