@@ -3,6 +3,7 @@
     justify-content: center;
     margin: 20px auto;
     width: 82%;
+    position: relative;
 }
 
 .search-bar-form {
@@ -54,6 +55,67 @@
     background: rgba(170, 74, 68, 0.1);
 }
 
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.search-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.search-dropdown-item:hover {
+    background-color: #f8f8f8;
+}
+
+.search-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.search-item-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.search-item-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.search-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+    font-family: 'poppins', sans-serif;
+}
+
+.search-item-price {
+    font-size: 13px;
+    color: #AA4A44;
+    font-weight: 600;
+    font-family: 'poppins', sans-serif;
+}
+
 @media (max-width: 1280px) {
     .search-bar-container {
         width: 90%;
@@ -68,6 +130,19 @@
     .search-bar-button svg {
         width: 18px;
         height: 18px;
+    }
+    
+    .search-item-image {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .search-item-name {
+        font-size: 13px;
+    }
+    
+    .search-item-price {
+        font-size: 12px;
     }
 }
 
@@ -85,6 +160,24 @@
     .search-bar-button svg {
         width: 16px;
         height: 16px;
+    }
+    
+    .search-dropdown-item {
+        padding: 10px 12px;
+    }
+    
+    .search-item-image {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+    }
+    
+    .search-item-name {
+        font-size: 12px;
+    }
+    
+    .search-item-price {
+        font-size: 11px;
     }
 }
 
@@ -106,5 +199,23 @@
     .search-bar-button svg {
         width: 14px;
         height: 14px;
+    }
+    
+    .search-dropdown-item {
+        padding: 8px 10px;
+    }
+    
+    .search-item-image {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+    
+    .search-item-name {
+        font-size: 11px;
+    }
+    
+    .search-item-price {
+        font-size: 10px;
     }
 }

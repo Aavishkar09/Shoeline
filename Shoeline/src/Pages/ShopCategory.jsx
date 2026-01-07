@@ -45,7 +45,7 @@ const ShopCategory = (props) => {
   return (
     <div className='shop-category'>
       <img src={props.banner} alt=''/>
-      <SearchBar onSearch={handleSearch} placeholder={`Search ${props.category} products...`} />
+      <SearchBar onSearch={handleSearch} placeholder={`Search ${props.category} products...`} category={props.category} />
       <div className='shopcategory-indexSort'>
         <p>
           <span>Showing 1-12</span> out of 36 products
