@@ -20,7 +20,7 @@ cloudinary.config({
 });
 
 //Database Connection with MongoDB
-mongoose.connect(process.env.MONGO_URL);
+const connectDB = require('./lib/mongodb');
 
 //API Creation
 
@@ -192,6 +192,7 @@ const fetchAdmin = async (req,res,next)=>{
 }
 
 app.post('/addproduct', fetchAdmin, async (req, res) => {
+    await connectDB();
     console.log("Received Data:", req.body);
     let products = await Product.find({});
     let id = products.length > 0 ? products.slice(-1)[0].id + 1 : 1;
@@ -224,6 +225,7 @@ app.post('/addproduct', fetchAdmin, async (req, res) => {
 //Creating API for Deleting Products
 
 app.post('/removeproduct', fetchAdmin, async (req,res)=>{
+    await connectDB();
     await Product.findOneAndDelete({id:req.body.id});
     console.log("Removed");
     res.json({
@@ -235,6 +237,7 @@ app.post('/removeproduct', fetchAdmin, async (req,res)=>{
 
 //Creating API for getting all products
 app.get('/allproducts',async (req,res) =>{
+    await connectDB();
     let products = await Product.find({});
     console.log("All Products Fetched");
     res.send(products);
@@ -243,6 +246,7 @@ app.get('/allproducts',async (req,res) =>{
 
 //Creating endpoint for registering user
 app.post('/signup',async (req,res)=>{
+    await connectDB();
     let check = await Users.findOne({email:req.body.email});
     if(check){
         return res.status(400).json({success:false,errors:"existing user found with same email-id"})
@@ -274,6 +278,7 @@ app.post('/signup',async (req,res)=>{
 
 //Creating Endpoints for user Login
 app.post('/login',async (req,res)=>{
+    await connectDB();
     let user = await Users.findOne({email:req.body.email});
     if(user){
         const passCompare = req.body.password === user.password
@@ -297,6 +302,7 @@ app.post('/login',async (req,res)=>{
 
 //Creating Endpoints for admin Login
 app.post('/admin/login',async (req,res)=>{
+    await connectDB();
     let admin = await Admin.findOne({email:req.body.email});
     if(admin){
         const passCompare = await bcrypt.compare(req.body.password, admin.password);
@@ -320,6 +326,7 @@ app.post('/admin/login',async (req,res)=>{
 
 //creating endpoint for newcollection data
 app.get('/newcollection',async (req,res)=>{
+    await connectDB();
     let products = await Product.find({});
     let newcollection = products.slice(1).slice(-8);
     console.log("Newcollection Fetched");
@@ -328,6 +335,7 @@ app.get('/newcollection',async (req,res)=>{
 
 //creating endpoint in mwn category
 app.get('/popularinmen',async(req,res)=>{
+    await connectDB();
     let products = await Product.find({category:"men"});
     let popular_in_men = products.slice(0,4);
     console.log("Popular in women fetched");
@@ -336,6 +344,7 @@ app.get('/popularinmen',async(req,res)=>{
 
 //creating endpoint for adding endpoint in cartdata
 app.post('/addtocart',fetchUser,async(req,res)=>{
+    await connectDB();
     console.log("Added",req.body.itemId);
     let userData = await Users.findOne({_id:req.user.id});
     userData.cartData[req.body.itemId] += 1;
@@ -345,6 +354,7 @@ app.post('/addtocart',fetchUser,async(req,res)=>{
 
 //creating endpoint to remove product from cartdata
 app.post('/removefromcart',fetchUser,async(req,res)=>{
+    await connectDB();
     console.log("removed",req.body.itemId);
     let userData = await Users.findOne({_id:req.user.id});
     if(userData.cartData[req.body.itemId]>0)
@@ -355,6 +365,7 @@ app.post('/removefromcart',fetchUser,async(req,res)=>{
 
 //creating endpoint to get cartdata
 app.post('/getcart',fetchUser,async(req,res)=>{
+    await connectDB();
     console.log("GetCart");
     let userData = await Users.findOne({_id:req.user.id})
     res.json(userData.cartData);
