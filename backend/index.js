@@ -89,6 +89,18 @@ const Product = mongoose.model("Product",{
         type: String,
         required: true,
     },
+    size:{
+        type: [String],
+        default: [],
+    },
+    color:{
+        type: [String],
+        default: [],
+    },
+    type:{
+        type: String,
+        default: '',
+    },
     date:{
         type: Date,
         default: Date.now,
@@ -191,6 +203,9 @@ app.post('/addproduct', fetchAdmin, async (req, res) => {
         category: req.body.category,
         new_price: req.body.new_price,
         old_price: req.body.old_price,
+        size: req.body.size || [],
+        color: req.body.color || [],
+        type: req.body.type || '',
     });
 
     await product.save()

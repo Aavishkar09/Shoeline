@@ -1,5 +1,5 @@
-import React, { useContext, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'; 
+import React, { useContext, useRef, useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'; 
 
 import './Navbar.css'
 import logo from '../../../src/assets/logo.jpg'
@@ -12,6 +12,15 @@ const Navbar = () => {
     const [menu,setMenu]= useState("shop");
     const {getTotalCartItems} = useContext(ShopContext);
     const menuRef = useRef();
+    const location = useLocation();
+
+    useEffect(() => {
+        const path = location.pathname;
+        if (path === '/') setMenu('shop');
+        else if (path === '/mens') setMenu('mens');
+        else if (path === '/womens') setMenu('womens');
+        else if (path === '/kids') setMenu('kids');
+    }, [location]);
 
     const dropdown_toggle = (e) =>{
         menuRef.current.classList.toggle('nav-menu-visible');

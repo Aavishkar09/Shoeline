@@ -281,49 +281,95 @@
 @media (max-width:500px){
     .productdisplay{
         flex-direction: column;
+        height: auto;
+        margin: 10px;
     }
     .productdisplay-left{
+        flex: none;
+        max-width: 100%;
         gap: 10px;
-        flex-direction: row;
-        margin: auto;
+        flex-direction: column;
+        margin-bottom: 20px;
     }
     .productdisplay-img-list{
-        flex-direction: column;
+        flex-direction: row;
         gap: 8px;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        order: 2;
     }
     .productdisplay-img-list img{
-        height: 75px;
+        height: 60px;
+        width: 60px;
+        flex: 0 0 60px;
+    }
+    .productdisplay-img{
+        order: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
     }
     .productdisplay-main-img{
-        height: 330px;
-
+        height: 280px;
+        width: auto;
+        max-width: 100%;
     }
     .productdisplay-right{
-        margin: 5px;
-        
+        flex: none;
+        max-width: 100%;
+        padding-left: 0;
+        margin: 0;
+        height: auto;
+        overflow-y: visible;
     }
     .productdisplay-right h1{
-        margin-top: 15px;
-        font-size: 20px;
-        font-weight: 500;
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    .productdisplay-right-stars{
+        margin-top: 10px;
+        margin-bottom: 15px;
     }
     .productdisplay-right-stars img{
-        width: 15px;
+        width: 16px;
+    }
+    .productdisplay-right-prices{
+        margin: 20px 0;
+        font-size: 20px;
+    }
+    .productdisplay-right-description{
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    .productdisplay-right-size h1{
+        margin-top: 25px;
+        font-size: 18px;
+        margin-bottom: 15px;
     }
     .productdisplay-right-sizes{
-        gap: 10px;
-        margin: 20px 0px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin: 15px 0 25px 0;
     }
     .productdisplay-right-sizes div{
-        padding: 10px 16px;
+        padding: 12px 8px;
         font-size: 14px;
+        text-align: center;
     }
     .productdisplay-right button{
-        width: 130px;
-        font-size: 15px;
-        padding: 12px 0px;
+        width: 100%;
+        font-size: 16px;
+        padding: 15px 0;
+        margin-bottom: 20px;
+        border-radius: 8px;
     }
     .productdisplay-right-category{
-        font-size: 16px;
+        font-size: 14px;
+        margin-top: 8px;
     }
 }

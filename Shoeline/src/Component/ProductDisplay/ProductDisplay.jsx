@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './ProductDisplay.css'
 import star_icon from '../../assets/star_icon.png'
 import star_dull_icon from '../../assets/star_dull_icon.png'
@@ -6,8 +7,16 @@ import { ShopContext } from '../../Context/ShopContext'
 
 const ProductDisplay = (props) => {
     const {product} = props;
-
     const {addToCart} = useContext(ShopContext);
+    const navigate = useNavigate();
+
+    const handleAddToCart = () => {
+        if (localStorage.getItem('auth-token')) {
+            addToCart(product.id);
+        } else {
+            navigate('/login');
+        }
+    };
 
   return (
     <div className='productdisplay'>
@@ -56,7 +65,7 @@ const ProductDisplay = (props) => {
                 <div>12</div>
             </div>
         </div>
-        <button onClick={()=>(addToCart(product.id))}>Add to Bag</button>
+        <button onClick={handleAddToCart}>Add to Bag</button>
         <p className='productdisplay-right-category'><span>Category :Men</span> </p>
         <p className='productdisplay-right-category'><span>Tags :Modern, Latest</span> </p>
       </div>
