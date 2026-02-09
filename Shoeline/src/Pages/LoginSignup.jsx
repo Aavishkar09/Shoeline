@@ -5,6 +5,7 @@ import './css/LoginSignup.css'
 const LoginSignup = () => {
   
   const [state,setState] = useState("Login");
+  const [emailSent, setEmailSent] = useState(false);
   const [formData,setFormData] = useState({
     username:"",
     password:"",
@@ -17,54 +18,64 @@ const LoginSignup = () => {
 
   const login = async () => {
     console.log("Login Function executed",formData)
-    let responseData;
-    await fetch(`${import.meta.env.VITE_API_URL}/login`,{
+    const response = await fetch(`${import.meta.env.VITE_DJANGO_API_URL}/api/user-login/`,{
       method:'POST',
       headers:{
-        Accept:'application/form-data',
         'Content-Type':'application/json',
       },
-      body: JSON.stringify(formData),
-    }).then((response)=> response.json()).then((data)=>responseData=data)
-    if(responseData.success){
-      localStorage.setItem('auth-token',responseData.token);
+      body: JSON.stringify({ email: formData.email, password: formData.password }),
+    });
+    const data = await response.json();
+    if(data.access){
+      localStorage.setItem('auth-token',data.access);
       window.location.replace("/");
     }
     else{
-      alert(responseData.errors)
+      alert(data.detail || 'Login failed')
     }
 
   }
 
   const signup = async ()=>{
     console.log("SignUp Function executed",formData)
-    let responseData;
-    await fetch(`${import.meta.env.VITE_API_URL}/signup`,{
+    const response = await fetch(`${import.meta.env.VITE_DJANGO_API_URL}/api/send-verification-email/`,{
       method:'POST',
       headers:{
-        Accept:'application/form-data',
         'Content-Type':'application/json',
       },
-      body: JSON.stringify(formData),
-    }).then((response)=> response.json()).then((data)=>responseData=data)
-    if(responseData.success){
-      localStorage.setItem('auth-token',responseData.token);
-      window.location.replace("/");
+      body: JSON.stringify({ email: formData.email }),
+    });
+    const data = await response.json();
+    if(data.success){
+      setEmailSent(true);
     }
     else{
-      alert(responseData.errors)
+      alert(data.error || 'Failed to send verification email')
     }
   } 
   
+  if (emailSent) {
+    return (
+      <div className='loginsignup'>
+        <div className='loginsignup-container'>
+          <h1>Check Your Email</h1>
+          <p>We've sent a verification link to {formData.email}</p>
+          <p>Please check your email and click the link to complete registration.</p>
+          <button onClick={() => { setEmailSent(false); setState("Login"); }}>Back to Login</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     
     <div className='loginsignup'>
       <div className='loginsignup-container'>
         <h1>{state}</h1>
         <div className='loginsignup-fields'>
-        {state==="Sign Up"?<input name='username' value={formData.username} onChange={changeHandler} type='text' placeholder='Name'/>:<></>}
+        {state==="Sign Up"?<></>:<input name='username' value={formData.username} onChange={changeHandler} type='text' placeholder='Name'/>}
           <input name='email' value={formData.email} onChange={changeHandler} type='email' placeholder='Email-Id'/>
-          <input name='password' value={formData.password} onChange={changeHandler} type='password' placeholder='Password'/>
+          {state==="Login"?<input name='password' value={formData.password} onChange={changeHandler} type='password' placeholder='Password'/>:<></>}
         </div>
           <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
           {state==="Sign Up"?

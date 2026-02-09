@@ -54,7 +54,7 @@ const CartItems = () => {
                         <h3><span>&#8377;</span>{getTotalCartAmount()}</h3>
                     </div>
                 </div>
-                <button>Proceed To Checkout</button>
+                <button onClick={() => window.location.href = '/checkout'}>Proceed To Checkout</button>
             </div>
             <div className='cartitems-promocode'>
                 <p>If you have any Promocode, enter it here</p>

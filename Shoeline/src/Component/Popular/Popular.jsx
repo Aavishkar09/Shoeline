@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Popular.css'
 import Item from '../Item/Item'
-
+import { usePopularInMen } from '../../hooks/useProducts'
 
 const Popular = () => {
+  const { data: popularProducts = [], isLoading, error } = usePopularInMen();
 
-  const [popularProducts,setPopularProducts] = useState([]);
-
-  useEffect(()=>{
-    fetch(`${import.meta.env.VITE_API_URL}/popularinmen`)
-    .then((response)=>response.json())
-    .then((data)=>setPopularProducts(data))
-  },[])
+  if (isLoading) return <div className='popular'><h2>Loading...</h2></div>;
+  if (error) return <div className='popular'><h2>Error loading popular products</h2></div>;
 
   return (
     <div className='popular'>

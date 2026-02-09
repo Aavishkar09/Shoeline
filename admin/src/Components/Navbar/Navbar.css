@@ -18,8 +18,25 @@
     font-size: 30px;
     font-weight: 600; 
 }
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 .nav-profile{
     width: 75px;
+}
+.logout-btn {
+    padding: 8px 16px;
+    background: #ff4141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.logout-btn:hover {
+    background: #e63939;
 }
 @media(max-width:800px){
     .navbar{

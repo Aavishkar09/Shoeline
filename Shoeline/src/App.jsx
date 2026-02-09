@@ -6,7 +6,10 @@ import Shop from './Pages/Shop'
 import Product from './Pages/Product'
 import ShopCategory from './Pages/ShopCategory'
 import LoginSignup from './Pages/LoginSignup'
+import VerifyEmail from './Pages/VerifyEmail'
 import Cart from './Pages/Cart'
+import Checkout from './Pages/Checkout'
+import OrderConfirmation from './Pages/OrderConfirmation'
 import Footer from './Component/Footer/Footer'
 import men_banner from './assets/men_banner.png'
 import women_banner from './assets/women_banner.png'
@@ -31,7 +34,10 @@ function App() {
             <Route path=':productId' element={<Product/>}/>
           </Route>
           <Route path='/cart' element={<Cart/>}/>
+          <Route path='/checkout' element={<Checkout/>}/>
+          <Route path='/order-confirmation' element={<OrderConfirmation/>}/>
           <Route path='/login' element={<LoginSignup/>}/>
+          <Route path='/verify-email' element={<VerifyEmail/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

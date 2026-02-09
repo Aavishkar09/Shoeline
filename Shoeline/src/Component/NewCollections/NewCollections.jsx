@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './NewCollections.css'
 import Item from '../Item/Item'
+import { useNewCollection } from '../../hooks/useProducts'
 
 const NewCollections = () => {
+  const { data: new_collection = [], isLoading, error } = useNewCollection();
 
-const [new_collection,setNew_collection] = useState([]);
-
-useEffect(()=>{
-  fetch(`${import.meta.env.VITE_API_URL}/newcollection`)
-  .then((response)=>response.json())
-  .then((data)=>setNew_collection(data));
-},[])
+  if (isLoading) return <div className='new-collections'><h1>Loading...</h1></div>;
+  if (error) return <div className='new-collections'><h1>Error loading collections</h1></div>;
 
   return (
     <div className='new-collections'>
