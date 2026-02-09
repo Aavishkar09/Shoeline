@@ -1,5 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL;
-const DJANGO_API_BASE_URL = import.meta.env.VITE_DJANGO_API_URL;
+
+console.log('API_BASE_URL:', API_BASE_URL);
 
 const apiRequest = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
@@ -23,18 +24,18 @@ const apiRequest = async (endpoint, options = {}) => {
 
 export const authAPI = {
   sendVerificationEmail: (email) => 
-    fetch(`${DJANGO_API_BASE_URL}/api/send-verification-email/`, {
+    fetch(`${API_BASE_URL}/api/send-verification-email/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     }).then(res => res.json()),
   
   verifyEmail: (token) => 
-    fetch(`${DJANGO_API_BASE_URL}/api/verify-email/?token=${token}`)
+    fetch(`${API_BASE_URL}/api/verify-email/?token=${token}`)
       .then(res => res.json()),
   
   completeRegistration: (token, username, password) => 
-    fetch(`${DJANGO_API_BASE_URL}/api/complete-registration/`, {
+    fetch(`${API_BASE_URL}/api/complete-registration/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, username, password }),
@@ -42,10 +43,10 @@ export const authAPI = {
 };
 
 export const productAPI = {
-  getAll: () => apiRequest('/products/'),
-  getNewCollection: () => apiRequest('/products/newcollection'),
-  getPopularInWomen: () => apiRequest('/products/popularinwomen'),
-  getPopularInMen: () => apiRequest('/products/popularinmen'),
+  getAll: () => apiRequest('/api/products/'),
+  getNewCollection: () => apiRequest('/api/products/newcollection/'),
+  getPopularInWomen: () => apiRequest('/api/products/popularinwomen/'),
+  getPopularInMen: () => apiRequest('/api/products/popularinmen/'),
 };
 
 export const cartAPI = {
@@ -53,7 +54,7 @@ export const cartAPI = {
     const token = localStorage.getItem('auth-token');
     if (!token) return {};
     
-    const response = await fetch(`${API_BASE_URL}/cart/`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -79,7 +80,7 @@ export const cartAPI = {
     
     console.log('Adding to cart:', itemId);
     
-    const response = await fetch(`${API_BASE_URL}/cart/`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -99,7 +100,7 @@ export const cartAPI = {
     const token = localStorage.getItem('auth-token');
     if (!token) return {};
     
-    const response = await fetch(`${API_BASE_URL}/cart/${itemId}/`, {
+    const response = await fetch(`${API_BASE_URL}/api/cart/${itemId}/`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -116,7 +117,7 @@ export const orderAPI = {
     const token = localStorage.getItem('auth-token');
     if (!token) throw new Error('Not authenticated');
     
-    const response = await fetch(`${API_BASE_URL}/orders/checkout/`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders/checkout/`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -137,7 +138,7 @@ export const orderAPI = {
     const token = localStorage.getItem('auth-token');
     if (!token) return [];
     
-    const response = await fetch(`${API_BASE_URL}/orders/`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders/`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
