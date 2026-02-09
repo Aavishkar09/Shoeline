@@ -3,6 +3,7 @@ const DJANGO_API_BASE_URL = import.meta.env.VITE_DJANGO_API_URL;
 
 const apiRequest = async (endpoint, options = {}) => {
   const url = `${API_BASE_URL}${endpoint}`;
+  console.log('Backend URL:', url);
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -42,9 +43,9 @@ export const authAPI = {
 
 export const productAPI = {
   getAll: () => apiRequest('/products/'),
-  getNewCollection: () => apiRequest('/newcollection'),
-  getPopularInWomen: () => apiRequest('/popularinwomen'),
-  getPopularInMen: () => apiRequest('/popularinmen'),
+  getNewCollection: () => apiRequest('/products/newcollection'),
+  getPopularInWomen: () => apiRequest('/products/popularinwomen'),
+  getPopularInMen: () => apiRequest('/products/popularinmen'),
 };
 
 export const cartAPI = {
