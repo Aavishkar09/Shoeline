@@ -18,7 +18,7 @@ const LoginSignup = () => {
 
   const login = async () => {
     console.log("Login Function executed",formData)
-    const response = await fetch(`${import.meta.env.VITE_DJANGO_API_URL}/api/user-login/`,{
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user-login/`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -38,7 +38,7 @@ const LoginSignup = () => {
 
   const signup = async ()=>{
     console.log("SignUp Function executed",formData)
-    const response = await fetch(`${import.meta.env.VITE_DJANGO_API_URL}/api/send-verification-email/`,{
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/send-verification-email/`,{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
