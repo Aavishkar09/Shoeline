@@ -4,11 +4,14 @@ import App from './App.jsx'
 import './index.css'
 import ShopContextProvider from './Context/ShopContext.jsx'
 import { QueryProvider } from './providers/QueryProvider.jsx'
+import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryProvider>
     <ShopContextProvider>
-      <App/>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </ShopContextProvider>
   </QueryProvider>
 )
